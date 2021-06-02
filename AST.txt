@@ -1,0 +1,139 @@
+Document: {
+	header(DocumentHeader): {
+		CommentNode: {
+			comment: <!--8-->,
+			type: Normal,
+		},,
+		CommentNode: {
+			comment: <!-- cp Switch-->,
+			type: Normal,
+		},,
+	},
+	body(DocumentBody): {
+		ElementNode: {
+			name: html,
+			type: Normal,
+			children: [
+				ElementNode: {
+					name: head,
+					type: Normal,
+					children: [
+					],
+					attributes: [],
+				},
+				ElementNode: {
+					name: body,
+					type: Normal,
+					children: [
+						ElementNode: {
+							name: div,
+							type: Normal,
+							children: [
+								ElementNode: {
+									name: h1,
+									type: Normal,
+									children: [
+										TextNode: {
+											textValue:  displayed ,
+										}
+									],
+									attributes: [
+										Directive: {
+											type: cp-switch-case,
+											value(NumberLiteral): {
+												value: 1.0,
+											},
+										}
+									],
+								},
+								ElementNode: {
+									name: h2,
+									type: Normal,
+									children: [
+										TextNode: {
+											textValue:  displayed ,
+										}
+									],
+									attributes: [
+										Directive: {
+											type: cp-switch-case,
+											value(NumberLiteral): {
+												value: 2.0,
+											},
+										}
+									],
+								},
+								ElementNode: {
+									name: h3,
+									type: Normal,
+									children: [
+										TextNode: {
+											textValue:  displayed ,
+										}
+									],
+									attributes: [
+										Directive: {
+											type: cp-switch-case,
+											value(NumberLiteral): {
+												value: 3.0,
+											},
+										}
+									],
+								},
+								ElementNode: {
+									name: h4,
+									type: Normal,
+									children: [
+										TextNode: {
+											textValue:  displayed ,
+										}
+									],
+									attributes: [
+										Directive: {
+											type: cp-switch-case,
+											value(NumberLiteral): {
+												value: 4.0,
+											},
+										}
+									],
+								},
+								ElementNode: {
+									name: h2,
+									type: Normal,
+									children: [
+										TextNode: {
+											textValue:  displayed ,
+										}
+									],
+									attributes: [
+										Directive: {
+											type: cp-switchDefault,
+										}
+									],
+								},
+							],
+							attributes: [
+								Directive: {
+									type: cp-switch,
+									value(AccessExpression): {
+										object(ReferenceExpression): {
+											reference: object,
+										},
+										method(AccessByProperty): {
+											property: user,
+											method(AccessByProperty): {
+												property: type,
+											},
+										},
+									},
+								}
+							],
+						},
+					],
+					attributes: [],
+				},
+			],
+			attributes: [],
+		},
+	},
+}
