@@ -41,7 +41,7 @@ style
 	: STYLE_OPEN (STYLE_BODY | STYLE_SHORT_BODY)
 	;
 	
-    elementContent
+elementContent
     : ( node | CDATA | mustache )*
     ;
 

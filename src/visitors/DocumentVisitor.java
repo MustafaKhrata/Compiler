@@ -100,9 +100,9 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 	public AbstractASTNode visitBody(BodyContext ctx) {
 		Scope scopeGlobal = new Scope();
 		scopeGlobal.setId("GlobalScope");
-		scopeGlobal.setParent(true);
-
+		scopeGlobal.setisParent(true);
 		Visitor.symbolTable.addScope(scopeGlobal);
+
 		List<DocumentNode> contents = new ArrayList<DocumentNode>();
 		DocumentBody body = new DocumentBody(contents);
 		body.setScope(scopeGlobal);
@@ -119,16 +119,26 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 	public AbstractASTNode visitExpDirective(ExpDirectiveContext ctx) {
 
 		AbstractASTNode value = expressionVisitor.visit(ctx.getChild(3));
-		if(ctx.getChild(0).getText().equals("cp-if")){
-			//System.out.println("heeeeereeeede "+ctx.getChild(0).getText());
 
+		if(ctx.getChild(0).getText().equals("cp-if")){
 			Scope scopeIf = new Scope();
-			scopeIf.setParent(true);
 			scopeIf.setId(value.createId());
-			scopeIf.setId(value.createId());
+			scopeIf.setisParent(true);
+			scopeIf.setmyParent(Visitor.symbolTable.getScopes().get(Visitor.symbolTable.getScopes().size() -1));
 			Visitor.symbolTable.addScope(scopeIf);
 
 			Directive directive =  new Directive(ctx.getChild(0).getText()  , scopeIf,value);
+			return directive;
+		}
+
+		if(ctx.getChild(0).getText().equals("cp-switch-case")){
+			Scope scopeSwitchCase = new Scope();
+			scopeSwitchCase.setId(value.createId());
+			scopeSwitchCase.setisParent(true);
+			scopeSwitchCase.setmyParent(Visitor.symbolTable.getScopes().get(Visitor.symbolTable.getScopes().size() -1));
+			Visitor.symbolTable.addScope(scopeSwitchCase);
+
+			Directive directive =  new Directive(ctx.getChild(0).getText()  , scopeSwitchCase,value);
 			return directive;
 		}
 
@@ -141,22 +151,16 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 	@Override
 	public AbstractASTNode visitStmtDirective(StmtDirectiveContext ctx) {
 
-		//ArrayLoopStatement value = (ArrayLoopStatement) visit(ctx.getChild(3));
-
-		if(ctx.getChild(3).getChild(0) instanceof ArrayLoopRawContext) {
+		if(ctx.getChild(3).getChild(0) instanceof HTMLParser.ArrayLoopContext) {
 			ArrayLoopStatement arrayLoopStatement = (ArrayLoopStatement) visit(ctx.getChild(3).getChild(0));
 			Scope  scope =arrayLoopStatement.symbols.get(0).getScope();
-			return new Directive(ctx.getChild(0).getText()  , scope,arrayLoopStatement);
+			return new Directive(ctx.getChild(0).getText() , scope,arrayLoopStatement);
 		}
 		else{
 			ObjectLoopStatement objectLoopStatement = (ObjectLoopStatement) visit(ctx.getChild(3).getChild(0));
-
-
 			Scope  scope =objectLoopStatement.symbols.get(0).getScope();
 			return new Directive(ctx.getChild(0).getText()  , scope,objectLoopStatement);
 		}
-
-
 
 
 
@@ -185,8 +189,9 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 		AbstractASTNode arrayToLoopOn = expressionVisitor.visit(ctx.getChild(2));
 
 		Scope scopeFor = new Scope();
-		scopeFor.setParent(true);
 		scopeFor.setId(AbstractASTNode.createId());
+		scopeFor.setisParent(true);
+		scopeFor.setmyParent(Visitor.symbolTable.getScopes().get(Visitor.symbolTable.getScopes().size() -1));
 		Visitor.symbolTable.addScope(scopeFor);
 
 		String loopVariable = ctx.getChild(0).getText();
@@ -205,8 +210,9 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 		AbstractASTNode arrayToLoopOn = expressionVisitor.visit(ctx.getChild(2));
 
 		Scope scopeFor = new Scope();
-		scopeFor.setParent(true);
 		scopeFor.setId(AbstractASTNode.createId());
+		scopeFor.setisParent(true);
+		scopeFor.setmyParent(Visitor.symbolTable.getScopes().get(Visitor.symbolTable.getScopes().size() -1));
 		Visitor.symbolTable.addScope(scopeFor);
 
 		String loopVariable = ctx.getChild(0).getText();
@@ -218,6 +224,7 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 		Symbol symbolIndexVar = new Symbol();
 		symbolIndexVar.setName(indexVariable);
 		symbolIndexVar.setScope(scopeFor);
+
 		ArrayLoopStatement arrayLoopStatement = new ArrayLoopStatement(loopVariable,indexVariable,(ValueExpression) arrayToLoopOn);
 		arrayLoopStatement.symbols.add(symbolLoopVar);
 		arrayLoopStatement.symbols.add(symbolIndexVar);
@@ -227,6 +234,13 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 
 	@Override
 	public AbstractASTNode visitDefaultDirective(DefaultDirectiveContext ctx) {
+
+		Scope scopeDefaultCase = new Scope();
+		scopeDefaultCase.setId(AbstractASTNode.createId());
+		scopeDefaultCase.setisParent(true);
+		scopeDefaultCase.setmyParent(Visitor.symbolTable.getScopes().get(Visitor.symbolTable.getScopes().size() -1));
+		Visitor.symbolTable.addScope(scopeDefaultCase);
+
 		return new Directive(ctx.getChild(0).getText());
 	}
 
@@ -239,7 +253,7 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 	public AbstractASTNode visitRawObjectLoop(RawObjectLoopContext ctx) {
 		AbstractASTNode objectToLoopOn = expressionVisitor.visit(ctx.getChild(4));
 		Scope scopeFor = new Scope();
-		scopeFor.setParent(true);
+		scopeFor.setisParent(true);
 		scopeFor.setId(AbstractASTNode.createId());
 		Visitor.symbolTable.addScope(scopeFor);
 
@@ -361,8 +375,8 @@ if(ctx.getChild(2) instanceof ElementAttributesContext){
 			List<Scope>  scopes = Visitor.symbolTable.getScopes();
 
 			for (int i = scopes.size()-1; i>=0;i--){
-				if(scopes.get(i).isParent()){
-					scopes.get(i).setParent(false);
+				if(scopes.get(i).getMyparent()){
+					scopes.get(i).setisParent(false);
 					break;
 				}
 

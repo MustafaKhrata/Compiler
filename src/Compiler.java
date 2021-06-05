@@ -15,8 +15,8 @@ import models.AbstractASTNode;
 import visitors.DocumentVisitor;
 
 public class Compiler {
-	static String filePath = "C:\\Users\\mhd\\Desktop\\Compiler-Repet\\Compiler\\index.html";
-	static String ASTPath = "C:\\Users\\mhd\\Desktop\\Compiler-Repet\\Compiler\\AST.txt";
+	static String filePath = "index.html";
+	static String ASTPath = "AST.txt";
 
 
 
@@ -32,7 +32,7 @@ public class Compiler {
 			CommonTokenStream cts = new CommonTokenStream(lexer);
 			HTMLParser parser = new HTMLParser(cts);
 			ParseTree pt = parser.document();
-		    showGUI(pt, parser);
+		    //showGUI(pt, parser);
 			DocumentVisitor visitor = new DocumentVisitor();
 			AbstractASTNode document = visitor.visit(pt);
 			FileWriter resultFile = new FileWriter(ASTPath);

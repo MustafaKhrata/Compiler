@@ -1,16 +1,17 @@
-<!--8-->
-<!-- cp Switch-->
+<!--2-->
+
+<!-- for stmt 1-->
 <html>
 <head>
-
+	<nav class="globalNav" data-module="nav">
+		<header>
+			<div>
+				<ul class="navProvider" cp-for="x in [1,4,5];i=index">
+					<li>{{i}} : {{i + x - 3}}</li>
+				</ul>
+			</div>
+		</header>
+	</nav>
 </head>
-<body>
-<div cp-switch="object.user.type">
-	<h1 cp-switch-case="1"> displayed </h1>
-	<h2 cp-switch-case="2"> displayed </h2>
-	<h3 cp-switch-case="3"> displayed </h3>
-	<h4 cp-switch-case="4"> displayed </h4>
-	<h2 cp-switchDefault> displayed </h2>
-</div>
-</body>
+<body></body>
 </html>

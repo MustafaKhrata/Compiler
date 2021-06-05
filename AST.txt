@@ -1,11 +1,11 @@
 Document: {
 	header(DocumentHeader): {
 		CommentNode: {
-			comment: <!--8-->,
+			comment: <!--1-->,
 			type: Normal,
 		},,
 		CommentNode: {
-			comment: <!-- cp Switch-->,
+			comment: <!-- If stmt-->,
 			type: Normal,
 		},,
 	},
@@ -18,118 +18,143 @@ Document: {
 					name: head,
 					type: Normal,
 					children: [
+						ElementNode: {
+							name: nav,
+							type: Normal,
+							children: [
+								ElementNode: {
+									name: header,
+									type: Normal,
+									children: [
+										ElementNode: {
+											name: div,
+											type: Normal,
+											children: [
+												ElementNode: {
+													name: ul,
+													type: Normal,
+													children: [
+														ElementNode: {
+															name: li,
+															type: Normal,
+															children: [
+																ElementNode: {
+																	name: span,
+																	type: Normal,
+																	children: [
+																		TextNode: {
+																			textValue: free text,
+																		}
+																	],
+																	attributes: [],
+																},
+															],
+															attributes: [
+																AttributeNode: {
+																	attribute: id,
+																	value: "mvpdLogo",
+																}
+															],
+														},
+														ElementNode: {
+															name: li,
+															type: Normal,
+															children: [],
+															attributes: [
+																AttributeNode: {
+																	attribute: id,
+																	value: "mvpdLogo1",
+																}
+															],
+														},
+														ElementNode: {
+															name: li,
+															type: Normal,
+															children: [],
+															attributes: [
+																AttributeNode: {
+																	attribute: id,
+																	value: "mvpdLogo2",
+																}
+															],
+														},
+														ElementNode: {
+															name: li,
+															type: Normal,
+															children: [],
+															attributes: [
+																AttributeNode: {
+																	attribute: id,
+																	value: "mvpdLogo3",
+																}
+															],
+														},
+													],
+													attributes: [
+														AttributeNode: {
+															attribute: class,
+															value: "navProvider",
+														}
+													],
+												},
+											],
+											attributes: [
+												AttributeNode: {
+													attribute: id,
+													value: "navAuth",
+												},
+												Directive: {
+													type: cp-if,
+													value(ReferenceExpression): {
+														reference: isAuthenitcated,
+													},
+												}
+											],
+										},
+										ElementNode: {
+											name: div,
+											type: Normal,
+											children: [
+												ElementNode: {
+													name: p,
+													type: Normal,
+													children: [
+														TextNode: {
+															textValue: Not auth,
+														}
+													],
+													attributes: [],
+												},
+											],
+											attributes: [
+												AttributeNode: {
+													attribute: id,
+													value: "outside-div",
+												}
+											],
+										},
+									],
+									attributes: [],
+								},
+							],
+							attributes: [
+								AttributeNode: {
+									attribute: class,
+									value: "globalNav",
+								},
+								AttributeNode: {
+									attribute: data-module,
+									value: "nav",
+								}
+							],
+						},
 					],
 					attributes: [],
 				},
 				ElementNode: {
 					name: body,
 					type: Normal,
-					children: [
-						ElementNode: {
-							name: div,
-							type: Normal,
-							children: [
-								ElementNode: {
-									name: h1,
-									type: Normal,
-									children: [
-										TextNode: {
-											textValue:  displayed ,
-										}
-									],
-									attributes: [
-										Directive: {
-											type: cp-switch-case,
-											value(NumberLiteral): {
-												value: 1.0,
-											},
-										}
-									],
-								},
-								ElementNode: {
-									name: h2,
-									type: Normal,
-									children: [
-										TextNode: {
-											textValue:  displayed ,
-										}
-									],
-									attributes: [
-										Directive: {
-											type: cp-switch-case,
-											value(NumberLiteral): {
-												value: 2.0,
-											},
-										}
-									],
-								},
-								ElementNode: {
-									name: h3,
-									type: Normal,
-									children: [
-										TextNode: {
-											textValue:  displayed ,
-										}
-									],
-									attributes: [
-										Directive: {
-											type: cp-switch-case,
-											value(NumberLiteral): {
-												value: 3.0,
-											},
-										}
-									],
-								},
-								ElementNode: {
-									name: h4,
-									type: Normal,
-									children: [
-										TextNode: {
-											textValue:  displayed ,
-										}
-									],
-									attributes: [
-										Directive: {
-											type: cp-switch-case,
-											value(NumberLiteral): {
-												value: 4.0,
-											},
-										}
-									],
-								},
-								ElementNode: {
-									name: h2,
-									type: Normal,
-									children: [
-										TextNode: {
-											textValue:  displayed ,
-										}
-									],
-									attributes: [
-										Directive: {
-											type: cp-switchDefault,
-										}
-									],
-								},
-							],
-							attributes: [
-								Directive: {
-									type: cp-switch,
-									value(AccessExpression): {
-										object(ReferenceExpression): {
-											reference: object,
-										},
-										method(AccessByProperty): {
-											property: user,
-											method(AccessByProperty): {
-												property: type,
-											},
-										},
-									},
-								}
-							],
-						},
-					],
+					children: [],
 					attributes: [],
 				},
 			],

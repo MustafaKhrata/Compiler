@@ -1,0 +1,190 @@
+event listener
+null value
+
+<!--1-->
+<!-- If stmt-->
+<html>
+<head>
+    <nav class="globalNav" data-module="nav">
+        <header>
+            <div id="navAuth" cp-if="isAuthenitcated">
+                <ul class="navProvider">
+                    <li id="mvpdLogo">
+					   <span>free text</span>
+					</li>
+                    <li id="mvpdLogo1"></li>
+                    <li id="mvpdLogo2"></li>
+                    <li id="mvpdLogo3"></li>
+                </ul>
+            </div>
+            <div id="outside-div">
+                <p>Not auth</p>
+            </div>
+        </header>
+    </nav>
+</head>
+<body></body>
+</html>
+
+
+
+
+
+
+
+<!--2-->
+
+<!-- for stmt 1-->
+<html>
+<head>
+    <nav class="globalNav" data-module="nav">
+        <header>
+            <div>
+                <ul class="navProvider" cp-for="x in [1,4,5];i=index">
+                    <li>{{i}} : {{i + x - 3}}</li>
+                </ul>
+            </div>
+        </header>
+    </nav>
+</head>
+<body></body>
+</html>
+
+
+<!--2-->
+
+<!-- Event listener-->
+<html>
+<head>
+    <nav class="globalNav" data-module="nav">
+        <header>
+            <div>
+                <ul class="navProvider" cp-for="x in [1,4,5];i=index">
+                    <li @click="handleClick(i)">{{i}} : {{i + x - 3}}</li>
+                    <li @click="handleClick(i+x)">{{i}} : {{i + x}}</li>
+                </ul>
+            </div>
+        </header>
+    </nav>
+</head>
+<body></body>
+</html>
+
+
+<!--4-->
+<!-- for stmt 2-->
+<html>
+<head>
+    <nav class="globalNav main-nav">
+        <header>
+            <div cp-show="showItem()">
+                <ul class="navProvider unordered-list" cp-for="obj in t">
+                    <li>{{i}} : {{obj.fistName}} {{obj.lastName}}</li>
+                </ul>
+            </div>
+        </header>
+    </nav>
+</head>
+<body>
+  <input name="search" @change="handleChange(event)" @focus="handleFocus()" />
+</body>
+</html>
+
+
+<!--5-->
+<!-- for stmt 3-->
+<html>
+<head>
+
+</head>
+<body>
+<form>
+    <p cp-for="k,v in obj">
+	<span cp-show="v.age < 18">
+	{{'Young'}}
+	</span> 
+	<span cp-show="v.age > 18">
+	{{v.married ? "Married" : "Single"}}
+	</span> 
+	</p>
+
+</form>
+</body>
+</html>
+
+<!--6-->
+<!-- ng model-->
+<html>
+<head>
+    <nav class="globalNav">
+        <header>
+        </header>
+    </nav>
+</head>
+<body>
+  <form>
+      <input type="text" cp-model="form.name" />
+      <input type="text" cp-if="needAge || xx" cp-model="form.age" />
+      <input type="text" cp-model="form.email" />
+  </form>
+</body>
+</html>
+
+
+<!--7-->
+<!-- cp show-->
+<html>
+<head>
+
+</head>
+<body>
+    <p cp-show="user && user.expert && user.expert.name"> {{'Expert name : ' + user.expert.name}} </p>
+    <p cp-hide="!user && !user.expert && !user.expert.name"> {{'Username'}} </p>
+</body>
+</html>
+
+
+<!--8-->
+<!-- cp Switch-->
+<html>
+<head>
+
+</head>
+<body>
+<div cp-switch="object.user.type">
+    <h1 cp-switch-case="1"> displayed </h1>
+    <h2 cp-switch-case="2"> displayed </h2>
+    <h3 cp-switch-case="3"> displayed </h3>
+    <h4 cp-switch-case="4"> displayed </h4>
+    <h2 cp-switchDefault> displayed </h2>
+</div>
+</body>
+</html>
+
+
+<!--9 -->
+<!-- Pipe -->
+<html>
+<head>
+
+</head>
+<body>
+<div>
+    <p cp-if="formatted && isDate"> {{time | myFormater:"YYYY-MM-DD"}} </p>
+    <p cp-if="!formatted && !isDate"> {{time | string}} </p>
+</div>
+</body>
+</html>
+
+<!--10-->
+<!-- One line  condition -->
+<html>
+<head>
+
+</head>
+<body>
+<div>
+    <p cp-if="result() < 30"> {{result() < 20 ? (x > 15 ? '1-1' : '1-2') : (x < 15 ? '2-1' : '2-2') }} </p>
+</div>
+</body>
+</html>

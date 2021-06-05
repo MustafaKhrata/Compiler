@@ -201,6 +201,11 @@ public class ExpressionVisitor extends Visitor<Expression>{
 	@Override
 	public Expression visitExp(ExpContext ctx) {
 
+//		String expVariable = ctx.getChild(0).getText();
+//		Symbol symbol = new Symbol();
+//		symbol.setName(expVariable);
+//		symbol.setScope();
+
 		return visit(ctx.getChild(0));
 	}
 
@@ -264,8 +269,8 @@ public class ExpressionVisitor extends Visitor<Expression>{
 //		System.out.println("ReferenceExp  " );
 //		System.out.println("name Var  : " + ctx.getChild(0).getText());
 
-			//Scope currentScope = Visitor.symbolTable.getScopes().get(Visitor.symbolTable.getScopes().size() - 1);
-			Scope currentScope =referenceExpression.getParentToNode();
+		//Scope currentScope = Visitor.symbolTable.getScopes().get(Visitor.symbolTable.getScopes().size() - 1);
+		Scope currentScope =referenceExpression.getParentToNode();
 		System.out.println("name scope : "+currentScope.getId());
 
 		Symbol symbolReference = new Symbol();

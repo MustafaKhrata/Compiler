@@ -7,7 +7,7 @@ public class Scope {
 
 
     private String id;
-    private Scope parent;
+    private Scope myparent;
     private boolean isParent = false;
     public Map<String, Symbol> symbolMap = new LinkedHashMap<String, Symbol>();
 
@@ -20,19 +20,19 @@ public class Scope {
         this.id = id;
     }
 
-    public Scope getParent() {
-        return parent;
+    public Scope getmyParent() {
+        return myparent;
     }
 
-    public void setParent(Scope parent) {
-        this.parent = parent;
+    public void setmyParent(Scope parent) {
+        this.myparent = parent;
     }
 
-    public boolean isParent() {
+    public boolean getMyparent() {
         return isParent;
     }
 
-    public void setParent(boolean parent) {
+    public void setisParent(boolean parent) {
         isParent = parent;
     }
 

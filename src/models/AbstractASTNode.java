@@ -1,7 +1,6 @@
 package models;
 
 import SymbolTable.Scope;
-import SymbolTable.Symbol;
 import models.util.Formatter;
 import visitors.Visitor;
 
@@ -10,7 +9,6 @@ import java.util.UUID;
 public abstract class AbstractASTNode implements ASTNodeInterface {
 
 	abstract protected String nodeName();
-	
 
 
 	abstract protected Formatter nodeValue(Formatter formatter);
@@ -36,7 +34,7 @@ public abstract class AbstractASTNode implements ASTNodeInterface {
 	public Scope getParentToNode(){
 
 		for(int i = Visitor.symbolTable.getScopes().size()-1; i>=0 ; i--){
-			if(Visitor.symbolTable.getScopes().get(i).isParent()){
+			if(Visitor.symbolTable.getScopes().get(i).getMyparent()){
 				Scope parentScope = Visitor.symbolTable.getScopes().get(i);
 
 				return parentScope;
