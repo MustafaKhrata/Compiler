@@ -110,8 +110,6 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 		for (int index = 0; index < ctx.getChildCount(); index++)
 			contents.add((DocumentNode) visit(ctx.getChild(index)));
 
-
-
 		return body;
 	}
 
@@ -244,7 +242,7 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 		return new Directive(ctx.getChild(0).getText());
 	}
 
-	@Override
+	@Override////////
 	public AbstractASTNode visitScriptletOrSeaWs(ScriptletOrSeaWsContext ctx) {
 		return new TextNode(ctx.getText());
 	}
@@ -274,7 +272,7 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 		return objectLoopStatement;
 	}
 
-	@Override
+	@Override/////////
 	public AbstractASTNode visitFilterExpression(FilterExpressionContext ctx) {
 		Expression oprand = expressionVisitor.visit(ctx.getChild(0));
 		FilterStatement filter = (FilterStatement) visit(ctx.getChild(1));
@@ -300,11 +298,17 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 
 	@Override
 	public AbstractASTNode visitNode(NodeContext ctx) {
-//		if(ctx.getChild(0) instanceof HTMLParser.ElementNodeContext && ctx.getChild(0).getChild(2) instanceof ElementAttributesContext && ((ElementAttributesContext) ctx.getChild(0).getChild(2)).directive().size()>0){
+//		boolean oneHtml=false;
+//		if(ctx.getChild(0) instanceof HTMLParser.ElementNodeContext && ctx.getChild(0).getChild(1).getText().equals("html") ){
+//			oneHtml=true;
+//		}
+//		if (oneHtml){
 //
 //		}
+//		else return null;
 
 		return visit(ctx.getChild(0));
+
 	}
 
 	public List<AbstractASTNode> getContent(ElementContentContext ctx) {
@@ -334,6 +338,9 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 	public AbstractASTNode visitNormalElement(NormalElementContext ctx) {
 		String tagName = ctx.getChild(1).getText();
 		String tagClose;
+
+		System.out.println("here: "+tagName);
+
 		if (ctx.getChild(2) instanceof ElementAttributesContext) {
 			tagClose = ctx.getChild(6).getText();
 		} else
@@ -364,30 +371,34 @@ public class DocumentVisitor extends Visitor<AbstractASTNode>{
 		if (switchElement)
 			switchExists.pop();
 
-if(ctx.getChild(2) instanceof ElementAttributesContext){
-		if (((ElementAttributesContext) ctx.getChild(2)).directive().size() > 0 &&
-				!((ElementAttributesContext) ctx.getChild(2)).directive(0).getChild(0).equals("cp-switch") &&
-				!((ElementAttributesContext) ctx.getChild(2)).directive(0).getChild(0).equals("cp-switchDefault") &&
-				!(((ElementAttributesContext) ctx.getChild(2)).directive(0).getChild(0) instanceof EventContext)
-		) {
-
-
-			List<Scope>  scopes = Visitor.symbolTable.getScopes();
-
-			for (int i = scopes.size()-1; i>=0;i--){
-				if(scopes.get(i).getMyparent()){
-					scopes.get(i).setisParent(false);
-					break;
-				}
-
-			}
-
-
-		}
-	}
+//		if(ctx.getChild(2) instanceof ElementAttributesContext){
+//		if (((ElementAttributesContext) ctx.getChild(2)).directive().size() > 0 &&
+//				!((ElementAttributesContext) ctx.getChild(2)).directive(0).getChild(0).equals("cp-switch") &&
+//				!((ElementAttributesContext) ctx.getChild(2)).directive(0).getChild(0).equals("cp-switchDefault") &&
+//				!(((ElementAttributesContext) ctx.getChild(2)).directive(0).getChild(0) instanceof EventContext)
+//		) {
+//
+//
+////			List<Scope>  scopes = Visitor.symbolTable.getScopes();
+////			for (int i = scopes.size()-1; i>=0;i--){
+////				if(scopes.get(i).getisparent()){
+////					scopes.get(i).setisParent(false);
+////					break;
+////				}
+////
+////			}
+//
+//
+//		}
+//
+//
+//
+//
+//	}
 
 		ElementNode element = new ElementNode(tagName, attributes.toArray(new DocumentNode[attributes.size()]), contents.toArray(new DocumentNode[contents.size()]));
 		return element;
+
 	}
 
 	@Override
@@ -435,6 +446,8 @@ if(ctx.getChild(2) instanceof ElementAttributesContext){
 		}
 		else
 			mustache = new MustachNode();
+
+
 		return mustache;
 	}
 	

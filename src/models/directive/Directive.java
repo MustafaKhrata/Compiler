@@ -49,17 +49,6 @@ public class Directive extends DocumentNode {
 		if(value != null)
 			formatter.object(value.toString("value"));
 
-//		if(this.type.equals("cp-if")){
-//
-//			Scope scopeIf = new Scope();
-//
-//			scopeIf.setId("IF_Scope");
-//			this.setScope(scopeIf);
-//			Visitor.symbolTable.addScope(this.scope);
-//
-//
-//
-//		}
 
 
 		return formatter;

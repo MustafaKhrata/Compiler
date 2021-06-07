@@ -32,7 +32,7 @@ public class Compiler {
 			CommonTokenStream cts = new CommonTokenStream(lexer);
 			HTMLParser parser = new HTMLParser(cts);
 			ParseTree pt = parser.document();
-		    //showGUI(pt, parser);
+		    showGUI(pt, parser);
 			DocumentVisitor visitor = new DocumentVisitor();
 			AbstractASTNode document = visitor.visit(pt);
 			FileWriter resultFile = new FileWriter(ASTPath);

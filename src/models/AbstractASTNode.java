@@ -34,7 +34,7 @@ public abstract class AbstractASTNode implements ASTNodeInterface {
 	public Scope getParentToNode(){
 
 		for(int i = Visitor.symbolTable.getScopes().size()-1; i>=0 ; i--){
-			if(Visitor.symbolTable.getScopes().get(i).getMyparent()){
+			if(Visitor.symbolTable.getScopes().get(i).getisparent()){
 				Scope parentScope = Visitor.symbolTable.getScopes().get(i);
 
 				return parentScope;
@@ -42,6 +42,12 @@ public abstract class AbstractASTNode implements ASTNodeInterface {
 		}
 		return null;
 	}
+
+	public void foundError(){
+
+		System.out.println("here is error");
+	}
+
 
     //Create Id Uniq for each Scope
 	public static String createId() {

@@ -1,17 +1,20 @@
-<!--2-->
-
-<!-- for stmt 1-->
+<!--4-->
+<!-- for stmt 2-->
 <html>
 <head>
-	<nav class="globalNav" data-module="nav">
+	<nav class="globalNav main-nav">
 		<header>
-			<div>
-				<ul class="navProvider" cp-for="x in [1,4,5];i=index">
-					<li>{{i}} : {{i + x - 3}}</li>
+			<div cp-show="showItem()">
+				<ul class="navProvider unordered-list" cp-for="obj in t">
+					<li>{{i}} : {{obj.fistName}} {{obj.lastName}}</li>
 				</ul>
 			</div>
 		</header>
 	</nav>
 </head>
-<body></body>
+<body>
+<input name="search" @change="handleChange(event)" @focus="handleFocus()" />
+</body>
 </html>
+
+

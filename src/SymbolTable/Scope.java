@@ -28,10 +28,10 @@ public class Scope {
         this.myparent = parent;
     }
 
-    public boolean getMyparent() {
+
+    public boolean getisparent() {
         return isParent;
     }
-
     public void setisParent(boolean parent) {
         isParent = parent;
     }
